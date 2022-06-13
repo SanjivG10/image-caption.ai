@@ -7,8 +7,9 @@ export interface ICaptionResponse {
 
 export interface IEmotionLabel {
     emotion: string;
-    isActive?: boolean;
+    isPremium: boolean;
     setSelectionCaptionType: Dispatch<SetStateAction<string>>;
+    isActive?: boolean;
 }
 
 export interface ICaptionTypeChooserProps {

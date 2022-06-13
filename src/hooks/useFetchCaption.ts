@@ -8,35 +8,32 @@ const useFetchCaption = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<any>("");
 
-    const fetchCaption = async (image: File, selectedCaption = "") => {
+    const fetchCaption = async (image: File, selectedCaptionType: string) => {
         const formData = new FormData();
         formData.append("image", image);
-        formData.append("selectedCaption", selectedCaption);
+        formData.append("selectedCaption", selectedCaptionType);
 
-        // for demo only
-        if (!selectedCaption) {
-            setCaptions([{
-                type: "Sarcastic",
-                caption: "This is a sarcastic comment"
-            }])
-            return;
-        }
+        setCaptions([{
+            type: selectedCaptionType,
+            caption: `This is a ${selectedCaptionType} comment. This is a ${selectedCaptionType} comment. This is a ${selectedCaptionType} comment. `
+        }]);
 
-        try {
-            setLoading(true);
-            const response = await fetch(BACKEND_URL, {
-                method: "POST",
-                body: formData
-            });
-            const data: ICaptionResponse[] = await response.json();
-            setCaptions(data);
-        }
-        catch (error) {
-            setError(error)
-        }
-        finally {
-            setLoading(false)
-        }
+
+        // try {
+        //     setLoading(true);
+        //     const response = await fetch(BACKEND_URL, {
+        //         method: "POST",
+        //         body: formData
+        //     });
+        //     const data: ICaptionResponse[] = await response.json();
+        //     setCaptions(data);
+        // }
+        // catch (error) {
+        //     setError(error)
+        // }
+        // finally {
+        //     setLoading(false)
+        // }
     }
 
     return {

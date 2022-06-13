@@ -24,27 +24,29 @@ const Pricing = () => {
     ]
 
     return (
-        <div className='flex flex-col'>
+        <div className='flex flex-col h-screen'>
             <Header title='Pricing' />
             <Navbar />
 
-            <h1 className="text-[3rem] uppercase font-bold mt-2 text-center">Pricing</h1>
-            <div className="flex justify-center mx-2 ">
-                {PricingTitle.map((item) => (<div>
-                    <div className='border text-center p-2 m-2'>
-                        <h2 className="text-2xl font-bold uppercase rounded mb-2">{item.price}</h2>
-                        <p className='mb-4'>
-                            <div className="font-bold text-[40px]">{item.availableCaptions}</div> captions with categories.
-                        </p>
+            <div className='flex flex-grow flex-col justify-center'>
+                <h1 className="text-[3rem] uppercase font-bold mt-2 text-center">Pricing</h1>
+                <div className="md:flex md:flex-row justify-center mx-2 sm:flex sm:flex-col ">
+                    {PricingTitle.map((item) => (<div>
+                        <div className='border text-center p-2 m-2'>
+                            <h2 className="text-lg font-bold uppercase rounded mb-2">{item.price}</h2>
+                            <p className='mb-4'>
+                                <div className="font-bold text-[40px]">{item.availableCaptions}</div> premium category captions
+                            </p>
 
-                        <a href={item.stripeLink} target="_blank">
-                            <button className='bg-secondary text-[#fff] rounded my-1 p-2 hover:translate-y-[-2px]'>
-                                Buy Now
-                            </button>
-                        </a>
+                            <a href={item.stripeLink} target="_blank">
+                                <button className='bg-secondary text-[#fff] rounded my-1 p-2 hover:translate-y-[-2px]'>
+                                    Buy Now
+                                </button>
+                            </a>
 
-                    </div>
-                </div>))}
+                        </div>
+                    </div>))}
+                </div>
             </div>
         </div>
     )
