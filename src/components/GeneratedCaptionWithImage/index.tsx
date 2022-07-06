@@ -56,6 +56,9 @@ const GeneratedCaptionWithImage = ({ uploadedImage }: IGeneratedCaptionProps) =>
     return (
         <>
             <div className='flex flex-col border-1 rounded-[10px] mt-4'>
+                <div onClick={() => window.location.reload()} className='my-1 p-1 hover:cursor-pointer rounded-lg max-w-[100px] border-2 border-secondary flex justify-center items-center '>
+                    Restart
+                </div>
                 <div className='mx-auto border-secondary'>
                     <Image image={uploadedImage} hasCancelButton={false} />
                 </div>
