@@ -11,29 +11,25 @@ const useFetchCaption = () => {
     const fetchCaption = async (image: File, selectedCaptionType: string) => {
         const formData = new FormData();
         formData.append("image", image);
-        formData.append("selectedCaption", selectedCaptionType);
-
-        setCaptions([{
-            type: selectedCaptionType,
-            caption: `This is a ${selectedCaptionType} comment. This is a ${selectedCaptionType} comment. This is a ${selectedCaptionType} comment. `
-        }]);
+        formData.append("category", selectedCaptionType);
 
 
-        // try {
-        //     setLoading(true);
-        //     const response = await fetch(BACKEND_URL, {
-        //         method: "POST",
-        //         body: formData
-        //     });
-        //     const data: ICaptionResponse[] = await response.json();
-        //     setCaptions(data);
-        // }
-        // catch (error) {
-        //     setError(error)
-        // }
-        // finally {
-        //     setLoading(false)
-        // }
+        try {
+            setLoading(true);
+            const response = await fetch(BACKEND_URL, {
+                method: "POST",
+                body: formData
+            });
+            const data: ICaptionResponse = await response.json();
+            setCaptions([data]);
+        }
+        catch (error) {
+            console.error(error);
+            setError("Something went wrong");
+        }
+        finally {
+            setLoading(false)
+        }
     }
 
     return {

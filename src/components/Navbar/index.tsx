@@ -1,16 +1,9 @@
 import React from 'react'
 import { Link } from 'gatsby';
-import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
-
+import GoogleLogin from '@components/GoogleLogin';
 
 const Navbar = () => {
-    const onSignInSuccess = (response: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-        console.log(response)
-    }
 
-    const onSignInFailure = (error: any) => {
-        console.log(error)
-    }
 
 
     return (
@@ -27,14 +20,7 @@ const Navbar = () => {
                     pricing
                 </Link>
 
-                <GoogleLogin
-                    className='mr-2'
-                    clientId="351886007976-qqg9cr66q8miqolfnmrq7kgjh3i78v60.apps.googleusercontent.com"
-                    buttonText="Login"
-                    onSuccess={onSignInSuccess}
-                    onFailure={onSignInFailure}
-                    cookiePolicy={'single_host_origin'}
-                />
+                <GoogleLogin />
             </div>
         </nav>
 

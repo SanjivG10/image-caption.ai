@@ -13,24 +13,17 @@ export enum CAPTION_OPTIONS {
 
 export const CAPTION_OPTIONS_MAP = [
     { label: "Happy", isPremium: false },
-    { label: "Sarcastic", isPremium: true },
+    { label: "Sarcastic", isPremium: false },
     { label: "Sad", isPremium: false },
     { label: "Exciting", isPremium: false },
-    { label: "Angry", isPremium: true },
-    { label: "Movie", isPremium: true },
-    { label: "Fearful", isPremium: true },
-    { label: "Awkward", isPremium: true },
-    { label: "Romantic", isPremium: true },
-    { label: "Admiring", isPremium: true },
-    { label: "Calming", isPremium: true },
-    { label: "Horror", isPremium: true },
+    { label: "Angry", isPremium: false },
+    { label: "Romantic", isPremium: false },
     { label: "Nostalgic", isPremium: false },
-    { label: "Confusing", isPremium: true },
-    { label: "Amusing", isPremium: true },
+    { label: "Motivational", isPremium: false },
 ];
 
 
-export const BACKEND_URL = "http://localhost:8000";
+export const BACKEND_URL = "https://api.imagecaptionai.com";
 
 
 export const SEO_HEADER = {

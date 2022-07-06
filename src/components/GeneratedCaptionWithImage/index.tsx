@@ -19,7 +19,6 @@ const GeneratedCaptionWithImage = ({ uploadedImage }: IGeneratedCaptionProps) =>
 
     const { loading, fetchCaption, captions: fetchedCaptions } = useFetchCaption();
 
-
     useEffect(() => {
         if (!(selectedCaptionType && uploadedImage)) {
             return;
@@ -36,7 +35,7 @@ const GeneratedCaptionWithImage = ({ uploadedImage }: IGeneratedCaptionProps) =>
             return;
         }
 
-        const allCaptions = [...generatedCaptions, ...fetchedCaptions];
+        const allCaptions = [...fetchedCaptions, ...generatedCaptions];
         const uniqueCaptionWithText = [... new Set(allCaptions.map((caption) => caption.caption))];
         const allUniqueCaptions: ICaptionResponse[] = [];
         uniqueCaptionWithText.map((text) => {
@@ -59,22 +58,21 @@ const GeneratedCaptionWithImage = ({ uploadedImage }: IGeneratedCaptionProps) =>
                     <Image image={uploadedImage} hasCancelButton={false} />
                 </div>
 
-                <CaptionTypeChooser selectedCaptionType={selectedCaptionType} setSelectedCaptionType={setSelectedCaptionType} />
+                <CaptionTypeChooser loading={loading} selectedCaptionType={selectedCaptionType} setSelectedCaptionType={setSelectedCaptionType} />
                 <div className='flex flex-col my-4'>
-                    {loading ? <Spinner /> :
-                        generatedCaptions.map((caption) => {
-                            return <div key={caption.caption} onClick={() => copyCaptionToClipBoard(caption.caption)} className='relative mt-2 rounded-[4px] p-2 bg-[#fff] mx-2 border border-secondary hover:cursor-pointer hover:translate-y-[-5px] flex flex-col '>
-                                <img alt="copy-icon" src='/assets/copy.svg' width={"24px"} />
-                                <div className=''>
-                                    {caption.caption}
-                                </div>
-                                <i className='ml-auto text-[8px]'>
-                                    click to copy
-                                </i>
-                                <p className='absolute top-0 right-2 mr-2 italic text-[#bfbfbf] text-sm'>{caption.type}</p>
+                    {loading && <Spinner />}
+                    {generatedCaptions.map((caption) => {
+                        return <div key={caption.caption} onClick={() => copyCaptionToClipBoard(caption.caption)} className='relative mt-2 rounded-[4px] p-2 bg-[#fff] mx-2 border border-secondary hover:cursor-pointer hover:translate-y-[-1px] flex flex-col '>
+                            <img alt="copy-icon" src='/assets/copy.svg' width={"24px"} />
+                            <div className=''>
+                                {caption.caption}
                             </div>
-
-                        })}
+                            <i className='mr-auto text-[8px]'>
+                                click to copy
+                            </i>
+                            <p className='absolute top-0 right-2 mr-2 italic text-[#bfbfbf] text-sm'>{caption.type}</p>
+                        </div>
+                    })}
                 </div>
             </div>
         </>
