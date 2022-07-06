@@ -23,12 +23,12 @@ export const CAPTION_OPTIONS_MAP = [
 ];
 
 
-export const BACKEND_URL = "https://api.imagecaptionai.com";
+export const BACKEND_URL = "https://api.imagecaptionai.com/";
 
 
 export const SEO_HEADER = {
-    title: "CaptionImage   - Caption your photos",
-    description: "Caption your photos and share them with your friends",
-    url: "https://captionimage.ai",
+    title: "CaptionImage   - Let AI Caption your image",
+    description: "Caption your photos with AI",
+    url: "https://captionimageai.com",
     image: "/assets/images/logo.png",
 }
