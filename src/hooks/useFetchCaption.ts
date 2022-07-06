@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ICaptionResponse } from "src/types";
 import { BACKEND_URL } from 'src/constants';
+import axios from "axios"
 
 const useFetchCaption = () => {
 
@@ -16,12 +17,13 @@ const useFetchCaption = () => {
 
         try {
             setLoading(true);
-            const response = await fetch(BACKEND_URL, {
-                method: "POST",
-                body: formData
+            const response = await axios.post(BACKEND_URL,
+                formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
             });
-            const data: ICaptionResponse = await response.json();
-            setCaptions([data]);
+            setCaptions([response.data]);
         }
         catch (error) {
             console.error(error);

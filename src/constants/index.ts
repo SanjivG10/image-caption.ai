@@ -23,7 +23,7 @@ export const CAPTION_OPTIONS_MAP = [
 ];
 
 
-export const BACKEND_URL = "https://api.imagecaptionai.com/";
+export const BACKEND_URL = "http://localhost:5000/";
 
 
 export const SEO_HEADER = {

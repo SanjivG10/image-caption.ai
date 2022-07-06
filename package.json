@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@fontsource/montserrat": "^4.5.11",
+    "axios": "^0.27.2",
     "gatsby": "^4.15.2",
     "gatsby-plugin-image": "^2.16.1",
     "gatsby-plugin-manifest": "^4.16.0",
