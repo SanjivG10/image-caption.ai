@@ -5,8 +5,6 @@ import React, { useEffect, useState } from 'react';
 import { CAPTION_OPTIONS } from 'src/constants';
 import useFetchCaption from 'src/hooks/useFetchCaption';
 import { ICaptionResponse } from 'src/types';
-import { StaticImage } from "gatsby-plugin-image"
-
 
 
 interface IGeneratedCaptionProps {
