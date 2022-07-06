@@ -5,6 +5,8 @@ import React, { useEffect, useState } from 'react';
 import { CAPTION_OPTIONS } from 'src/constants';
 import useFetchCaption from 'src/hooks/useFetchCaption';
 import { ICaptionResponse } from 'src/types';
+import { StaticImage } from "gatsby-plugin-image"
+
 
 
 interface IGeneratedCaptionProps {
@@ -63,7 +65,11 @@ const GeneratedCaptionWithImage = ({ uploadedImage }: IGeneratedCaptionProps) =>
                     {loading && <Spinner />}
                     {generatedCaptions.map((caption) => {
                         return <div key={caption.caption} onClick={() => copyCaptionToClipBoard(caption.caption)} className='relative mt-2 rounded-[4px] p-2 bg-[#fff] mx-2 border border-secondary hover:cursor-pointer hover:translate-y-[-1px] flex flex-col '>
-                            <img alt="copy-icon" src='assets/copy.svg' width={"24px"} />
+                            <img
+                                src="/copy.svg"
+                                width={24}
+                                alt="copy-icon"
+                            />
                             <div className=''>
                                 {caption.caption}
                             </div>

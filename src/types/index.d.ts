@@ -1,6 +1,7 @@
 
 export interface ICaptionResponse {
     caption: string;
+    type: string;
 }
 
 
