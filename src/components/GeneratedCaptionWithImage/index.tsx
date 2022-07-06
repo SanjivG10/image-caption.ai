@@ -63,7 +63,7 @@ const GeneratedCaptionWithImage = ({ uploadedImage }: IGeneratedCaptionProps) =>
                     {loading && <Spinner />}
                     {generatedCaptions.map((caption) => {
                         return <div key={caption.caption} onClick={() => copyCaptionToClipBoard(caption.caption)} className='relative mt-2 rounded-[4px] p-2 bg-[#fff] mx-2 border border-secondary hover:cursor-pointer hover:translate-y-[-1px] flex flex-col '>
-                            <img alt="copy-icon" src='/assets/copy.svg' width={"24px"} />
+                            <img alt="copy-icon" src='assets/copy.svg' width={"24px"} />
                             <div className=''>
                                 {caption.caption}
                             </div>
