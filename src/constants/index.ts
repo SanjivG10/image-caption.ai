@@ -19,16 +19,27 @@ export const CAPTION_OPTIONS_MAP = [
     { label: "Angry", isPremium: false },
     { label: "Romantic", isPremium: false },
     { label: "Nostalgic", isPremium: false },
-    { label: "Motivational", isPremium: false },
+    // { label: "Fearful", isPremium: false },
+    // { label: "Surprise", isPremium: false },
+    // { label: "Disgust", isPremium: false },
+    // { label: "Horror", isPremium: false },
+    // { label: "Admirable", isPremium: false },
+    // { label: "Amusing", isPremium: false },
+    // { label: "Awkward", isPremium: false },
+    // { label: "Interesting", isPremium: false },
+    // { label: "Relieving", isPremium: false },
+    // { label: "sexual desire", isPremium: false },
+    // { label: "Movie related", isPremium: false },
+    // { label: "boring", isPremium: false },
 ];
 
 
-export const BACKEND_URL = "https://api.imagecaptionai.com/";
+export const BACKEND_URL = "http://api.imagecaptionai.com/";
 
 
 export const SEO_HEADER = {
     title: "CaptionImage   - Let AI Caption your image",
     description: "Caption your photos with AI",
-    url: "https://captionimageai.com",
-    image: "/assets/images/logo.png",
+    url: "https://imagecaptionai.com",
+    image: "https://imagecaptionai.com" + "/homepage.png",
 }

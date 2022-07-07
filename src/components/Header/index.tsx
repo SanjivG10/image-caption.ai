@@ -21,6 +21,10 @@ const Header = (props: IHeaderProps) => {
             <meta property="og:description" content={description} data-rh="true" />
             <meta property="og:image" content={image} data-rh="true" />
             <meta property="og:url" content={url} data-rh="true" />
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content="imagecaptionai" />
+            <meta name="twitter:creator" content="@sanjivG" />
+            <meta property="og:url" content={SEO_HEADER.url} />
         </Helmet>
     )
 }
