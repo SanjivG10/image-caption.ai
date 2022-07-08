@@ -2,14 +2,13 @@ import FAQ from "@components/FAQ";
 import GeneratedCaptionWithImage from "@components/GeneratedCaptionWithImage";
 import Header from "@components/Header";
 import InfoHeader from "@components/InfoHeader";
-import Privacy from "@components/Privacy";
 import UploadButton from "@components/Upload";
 import { ModalContext } from "@context/modal";
 import React, { useState } from "react";
 
 const IndexPage = () => {
 
-  const [uploadedImage, setUploadedImage] = useState<File>();
+  const [uploadedImage, setUploadedImage] = useState("");
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(true);
 

@@ -1,9 +1,9 @@
 //https://tailwindcomponents.com/component/tailwind-file-upload 
 import React, { ChangeEvent } from 'react'
-
+import Resizer from "react-image-file-resizer";
 
 interface IUploadButtonProps {
-    setUploadedImage: (file: File) => void;
+    setUploadedImage: (image: string) => void;
     setError: (error: string) => void;
 }
 
@@ -11,7 +11,7 @@ interface IUploadButtonProps {
 const isImage = (file: File) => file['type'].includes('image');
 
 const UploadButton = ({ setUploadedImage, setError }: IUploadButtonProps) => {
-    const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
         const allFiles = e.target.files;
         if (!allFiles) {
             setError("Something went wrong");
@@ -30,7 +30,25 @@ const UploadButton = ({ setUploadedImage, setError }: IUploadButtonProps) => {
             return;
         }
 
-        setUploadedImage(file);
+
+        const resizeFile = (file: File) =>
+            new Promise((resolve) => {
+                Resizer.imageFileResizer(
+                    file,
+                    300,
+                    500,
+                    "JPEG",
+                    100,
+                    0,
+                    (uri) => {
+                        resolve(uri);
+                    },
+                    "base64"
+                );
+            });
+
+        const imageurl = await resizeFile(file) as string;
+        setUploadedImage(imageurl)
     }
     return (
         <label className="w-64 flex flex-col items-center px-4 py-6 bg-[#fff] text-secondary rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-secondary hover:text-[#fff]">

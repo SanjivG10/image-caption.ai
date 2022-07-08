@@ -8,7 +8,7 @@ import { ICaptionResponse } from 'src/types';
 
 
 interface IGeneratedCaptionProps {
-    uploadedImage: File;
+    uploadedImage: string;
 }
 
 const GeneratedCaptionWithImage = ({ uploadedImage }: IGeneratedCaptionProps) => {
