@@ -5,30 +5,45 @@ import InfoHeader from "@components/InfoHeader";
 import UploadButton from "@components/Upload";
 import { ModalContext } from "@context/modal";
 import React, { useState } from "react";
+import { Script } from "gatsby";
 
 const IndexPage = () => {
-
   const [uploadedImage, setUploadedImage] = useState("");
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(true);
 
   const componentToRender = () => {
     if (uploadedImage) {
-      return <GeneratedCaptionWithImage uploadedImage={uploadedImage} />
+      return <GeneratedCaptionWithImage uploadedImage={uploadedImage} />;
     }
 
-    return <>
-      <InfoHeader />
-      <div className="flex flex-col items-center mt-2">
-        <UploadButton setError={setError} setUploadedImage={setUploadedImage} />
-      </div>
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-8 text-center">
-        Thank you everyone for visiting. This is <a style={{
-          color: "blue"
-        }} href="https://www.instagram.com/_sanjivgautam/" target="blank">Sanjiv</a>, this app currently <b>doesn't work</b> because we couldn't afford the server cost 😔. If I continue to get the overwhelming support, I would probably re-launch it. Thank you very much for your ❤️!
-      </div>
-    </>
-  }
+    return (
+      <>
+        <Script src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=SgqXHu" />
+
+        <InfoHeader />
+        <div className="flex flex-col items-center mt-2">
+          <UploadButton
+            setError={setError}
+            setUploadedImage={setUploadedImage}
+          />
+        </div>
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 my-8 text-center">
+          Thank you everyone for visiting. This is{" "}
+          <a
+            style={{
+              color: "blue",
+            }}
+            href="https://www.instagram.com/_sanjivgautam/"
+            target="blank"
+          >
+            Sanjiv
+          </a>
+          , we are relaunching this app, so stay tuned for updates.
+        </div>
+      </>
+    );
+  };
 
   return (
     <ModalContext.Provider value={{ show: showModal, setShow: setShowModal }}>
@@ -44,7 +59,7 @@ const IndexPage = () => {
       <FAQ />
       {/* <ContactComponent /> */}
     </ModalContext.Provider>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;
