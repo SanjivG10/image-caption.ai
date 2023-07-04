@@ -8,7 +8,7 @@ import React, { useState } from "react";
 import { Script } from "gatsby";
 
 const IndexPage = () => {
-  const [uploadedImage, setUploadedImage] = useState("");
+  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(true);
 
