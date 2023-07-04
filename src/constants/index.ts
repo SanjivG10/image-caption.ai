@@ -1,14 +1,12 @@
 export enum CAPTION_OPTIONS {
   "Happy",
-  "Sad",
-  "Fear",
-  "Anger",
-  "Disgusting",
   "Sarcastic",
-  "Boring",
-  "Awkward",
+  "Sad",
   "Exciting",
+  "Angry",
   "Romantic",
+  "Nostalgic",
+  "Motivational",
 }
 
 export const CAPTION_OPTIONS_MAP = [
