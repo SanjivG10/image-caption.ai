@@ -36,7 +36,7 @@ export const CAPTION_OPTIONS_MAP = [
 export const BACKEND_URL =
   process.env["NODE_ENV"] === "production"
     ? "https://api.imagecaptionai.com/"
-    : "http://localhost:9999/";
+    : "http://localhost:5000/";
 
 export const S3_BUCKET_URL_PREFIX =
   "https://imagecaptionai.s3.us-west-2.amazonaws.com/";

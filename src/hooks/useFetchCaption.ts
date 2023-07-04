@@ -3,36 +3,49 @@ import { ICaptionResponse } from "src/types";
 import { BACKEND_URL, S3_BUCKET_URL_PREFIX } from "src/constants";
 import axios from "axios";
 
-async function dataUrlToFile(dataUrl: string, fileName: string): Promise<File> {
-  const res: Response = await fetch(dataUrl);
-  const blob: Blob = await res.blob();
-  return new File([blob], fileName, { type: "image/png" });
-}
-
 const useFetchCaption = () => {
   const [captions, setCaptions] = useState<ICaptionResponse[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any>("");
+  const [uploadedAWSImage, setUploadedImage] = useState("");
 
-  const fetchCaption = async (image: File, category: string) => {
+  const fetchCaption = async (
+    image: File,
+    category: string,
+    upload?: string
+  ) => {
     try {
       setLoading(true);
-      const response = await axios.post(
-        BACKEND_URL + "upload",
-        {
-          image: image.name,
-        },
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
+      let imageUrl = "";
+      if (upload) {
+        imageUrl = upload;
+      } else {
+        const response = await axios.post(
+          BACKEND_URL + "upload",
+          {
+            image: image.name,
           },
-        }
-      );
-      await axios.put(response.data.presigned_url, image);
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        const fileType = image.name.split(".").pop();
+        await axios.put(response.data.presigned_url, image, {
+          headers: {
+            "Content-Type": `image/${fileType}`,
+          },
+        });
+        imageUrl = S3_BUCKET_URL_PREFIX + response.data.filename;
+        localStorage.setItem("UPLOAD", imageUrl);
+      }
+
+      console.log(imageUrl, "haha");
       const captionResponse = await axios.post(
         BACKEND_URL,
         {
-          image: S3_BUCKET_URL_PREFIX + response.data.filename,
+          image: imageUrl,
           category,
         },
         {
@@ -41,6 +54,7 @@ const useFetchCaption = () => {
           },
         }
       );
+      setUploadedImage(imageUrl);
 
       setCaptions(captionResponse.data);
     } catch (error) {
@@ -56,6 +70,7 @@ const useFetchCaption = () => {
     loading,
     error,
     fetchCaption,
+    uploadedAWSImage,
   };
 };
 

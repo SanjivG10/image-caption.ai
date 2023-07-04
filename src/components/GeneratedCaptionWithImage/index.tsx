@@ -31,8 +31,13 @@ const GeneratedCaptionWithImage = ({
     if (!(selectedCaptionType && uploadedImage)) {
       return;
     }
+    const ALREADY_LOADED_IMAGE = localStorage.getItem("UPLOAD") ?? "";
     (async () => {
-      await fetchCaption(uploadedImage, selectedCaptionType);
+      await fetchCaption(
+        uploadedImage,
+        selectedCaptionType,
+        ALREADY_LOADED_IMAGE
+      );
     })();
   }, [selectedCaptionType]);
 

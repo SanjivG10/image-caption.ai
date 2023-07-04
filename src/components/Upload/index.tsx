@@ -10,6 +10,7 @@ const isImage = (file: File) => file["type"].includes("image");
 
 const UploadButton = ({ setUploadedImage, setError }: IUploadButtonProps) => {
   const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    localStorage.removeItem("UPLOAD");
     const allFiles = e.target.files;
     if (!allFiles) {
       setError("Something went wrong");

@@ -39,7 +39,7 @@ const IndexPage = () => {
           >
             Sanjiv
           </a>
-          , we are relaunching this app, so stay tuned for updates.
+          , we have relaunched the app.
         </div>
       </>
     );
