@@ -18,17 +18,6 @@ export const CAPTION_OPTIONS_MAP = [
   { label: "Romantic", isPremium: false },
   { label: "Nostalgic", isPremium: false },
   { label: "Philosophical", isPremium: false },
-  { label: "Movie-Quote", isPremium: false },
-  { label: "Fearful", isPremium: false },
-  { label: "Surprise", isPremium: false },
-  { label: "Disgust", isPremium: false },
-  { label: "Horror", isPremium: false },
-  { label: "Admirable", isPremium: false },
-  { label: "Amusing", isPremium: false },
-  { label: "Awkward", isPremium: false },
-  { label: "Interesting", isPremium: false },
-  { label: "Relieving", isPremium: false },
-  { label: "Boring", isPremium: false },
 ];
 
 export const BACKEND_URL =
