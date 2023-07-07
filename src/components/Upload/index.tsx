@@ -1,14 +1,20 @@
-//https://tailwindcomponents.com/component/tailwind-file-upload
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 interface IUploadButtonProps {
   setUploadedImage: React.Dispatch<React.SetStateAction<File | null>>;
   setError: (error: string) => void;
+  isLoggedIn: boolean;
+  setSignInModal: Dispatch<SetStateAction<boolean>>;
 }
 
 const isImage = (file: File) => file["type"].includes("image");
 
-const UploadButton = ({ setUploadedImage, setError }: IUploadButtonProps) => {
+const UploadButton = ({
+  setUploadedImage,
+  setError,
+  isLoggedIn,
+  setSignInModal,
+}: IUploadButtonProps) => {
   const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
     localStorage.removeItem("UPLOAD");
     const allFiles = e.target.files;
@@ -31,8 +37,30 @@ const UploadButton = ({ setUploadedImage, setError }: IUploadButtonProps) => {
 
     setUploadedImage(file);
   };
+
+  const handleUploadButtonClick = () => {
+    if (isLoggedIn) {
+      // Show the file select popup
+      document.getElementById("uploadInput")?.click();
+    } else {
+      // Set signInModal to true
+      setSignInModal(true);
+    }
+  };
+
+  const handleFileInputClick = (
+    e: React.MouseEvent<HTMLInputElement, MouseEvent>
+  ) => {
+    if (!isLoggedIn) {
+      e.preventDefault();
+    }
+  };
+
   return (
-    <label className="w-64 flex flex-col items-center px-4 py-6 bg-[#fff] text-secondary rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-secondary hover:text-[#fff]">
+    <label
+      className="w-64 flex flex-col items-center px-4 py-6 bg-indigo-500 text-[#fff] text-secondary rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-secondary hover:text-white"
+      onClick={handleUploadButtonClick}
+    >
       <svg
         className="w-8 h-8 animate-bounce"
         fill="currentColor"
@@ -44,8 +72,10 @@ const UploadButton = ({ setUploadedImage, setError }: IUploadButtonProps) => {
       <span className="mt-2 text-base leading-normal">Upload an image</span>
       <input
         type="file"
+        id="uploadInput"
         className="hidden"
         onChange={handleImageUpload}
+        onClick={handleFileInputClick}
         accept="image/*"
         multiple={false}
       />
