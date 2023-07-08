@@ -28,6 +28,7 @@ const useFetchCaption = () => {
           {
             headers: {
               "Content-Type": "multipart/form-data",
+              Authorization: localStorage.getItem("token") ?? "",
             },
           }
         );
@@ -41,7 +42,6 @@ const useFetchCaption = () => {
         localStorage.setItem("UPLOAD", imageUrl);
       }
 
-      console.log(imageUrl, "haha");
       const captionResponse = await axios.post(
         BACKEND_URL,
         {
@@ -51,6 +51,7 @@ const useFetchCaption = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            Authorization: localStorage.getItem("token") ?? "",
           },
         }
       );

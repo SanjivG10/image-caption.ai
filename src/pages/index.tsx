@@ -5,8 +5,8 @@ import Modal from "@components/Modal";
 import SignInForm from "@components/SignInForm";
 import UploadButton from "@components/Upload";
 import { ModalContext } from "@context/modal";
-import { Script } from "gatsby";
 import React, { useEffect, useState } from "react";
+import ReactGA from "react-ga4";
 
 const IndexPage = () => {
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
@@ -16,12 +16,14 @@ const IndexPage = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  ReactGA.initialize("G-SWGZG00FX2");
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       setIsLoggedIn(true);
     }
-  }, []);
+  }, [showSignInModal]);
 
   const componentToRender = () => {
     if (uploadedImage) {
@@ -30,7 +32,7 @@ const IndexPage = () => {
 
     return (
       <>
-        <Script src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=SgqXHu" />
+        {/* <Script src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=SgqXHu" /> */}
 
         <div>
           <InfoHeader />
@@ -58,7 +60,13 @@ const IndexPage = () => {
             show={showSignInModal}
             setShow={setShowSignInModal}
             title={isSignIn ? "Sign In" : "Register"}
-            body={<SignInForm isSignIn={isSignIn} setIsSignIn={setIsSignIn} />}
+            body={
+              <SignInForm
+                setShowSignInModal={setShowSignInModal}
+                isSignIn={isSignIn}
+                setIsSignIn={setIsSignIn}
+              />
+            }
           />
           <div className={`${showSignInModal ? "hidden" : ""}`}>
             {componentToRender()}

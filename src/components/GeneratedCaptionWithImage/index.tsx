@@ -56,8 +56,25 @@ const GeneratedCaptionWithImage = ({
       if (caption) return allUniqueCaptions.push(caption);
     });
 
-    setGeneratedCaptions(allUniqueCaptions);
+    const allUniqueCaptionsWithoutFirstDigit = allUniqueCaptions.map(
+      (value) => ({
+        ...value,
+        caption: removeNumbersFromBeginning(value.caption),
+      })
+    );
+
+    setGeneratedCaptions(allUniqueCaptionsWithoutFirstDigit);
   }, [fetchedCaptions]);
+
+  const removeNumbersFromBeginning = (caption: string): string => {
+    const regex = /^\d+\.\s*(.*)$/; // Regex to match numbers at the beginning
+
+    const match = caption.match(regex);
+    if (match && match.length > 1) {
+      return match[1];
+    }
+    return caption;
+  };
 
   const copyCaptionToClipBoard = async (caption: string) => {
     navigator.clipboard.writeText(caption);

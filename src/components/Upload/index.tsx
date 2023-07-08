@@ -39,11 +39,7 @@ const UploadButton = ({
   };
 
   const handleUploadButtonClick = () => {
-    if (isLoggedIn) {
-      // Show the file select popup
-      document.getElementById("uploadInput")?.click();
-    } else {
-      // Set signInModal to true
+    if (!isLoggedIn) {
       setSignInModal(true);
     }
   };
