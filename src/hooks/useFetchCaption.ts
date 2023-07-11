@@ -3,7 +3,7 @@ import { ICaptionResponse } from "src/types";
 import { BACKEND_URL, S3_BUCKET_URL_PREFIX } from "src/constants";
 import axios from "axios";
 
-const useFetchCaption = () => {
+const useFetchCaption = ({ isTrial }: { isTrial: boolean }) => {
   const [captions, setCaptions] = useState<ICaptionResponse[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any>("");
@@ -28,7 +28,9 @@ const useFetchCaption = () => {
           {
             headers: {
               "Content-Type": "multipart/form-data",
-              Authorization: localStorage.getItem("token") ?? "",
+              Authorization: isTrial
+                ? "trial"
+                : localStorage.getItem("token") ?? "",
             },
           }
         );
@@ -40,6 +42,7 @@ const useFetchCaption = () => {
         });
         imageUrl = S3_BUCKET_URL_PREFIX + response.data.filename;
         localStorage.setItem("UPLOAD", imageUrl);
+        localStorage.setItem("today", new Date().toISOString());
       }
 
       const captionResponse = await axios.post(
@@ -51,7 +54,9 @@ const useFetchCaption = () => {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            Authorization: localStorage.getItem("token") ?? "",
+            Authorization: isTrial
+              ? "trial"
+              : localStorage.getItem("token") ?? "",
           },
         }
       );

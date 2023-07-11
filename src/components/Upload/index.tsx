@@ -4,6 +4,7 @@ interface IUploadButtonProps {
   setUploadedImage: React.Dispatch<React.SetStateAction<File | null>>;
   setError: (error: string) => void;
   isLoggedIn: boolean;
+  isTrial: boolean;
   setSignInModal: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -13,6 +14,7 @@ const UploadButton = ({
   setUploadedImage,
   setError,
   isLoggedIn,
+  isTrial,
   setSignInModal,
 }: IUploadButtonProps) => {
   const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +41,7 @@ const UploadButton = ({
   };
 
   const handleUploadButtonClick = () => {
-    if (!isLoggedIn) {
+    if (!isLoggedIn && !isTrial) {
       setSignInModal(true);
     }
   };
@@ -47,7 +49,7 @@ const UploadButton = ({
   const handleFileInputClick = (
     e: React.MouseEvent<HTMLInputElement, MouseEvent>
   ) => {
-    if (!isLoggedIn) {
+    if (!isLoggedIn && !isTrial) {
       e.preventDefault();
     }
   };

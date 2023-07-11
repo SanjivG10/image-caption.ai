@@ -8,10 +8,12 @@ import { ICaptionResponse } from "src/types";
 
 interface IGeneratedCaptionProps {
   uploadedImage: File;
+  isTrial: boolean;
 }
 
 const GeneratedCaptionWithImage = ({
   uploadedImage,
+  isTrial,
 }: IGeneratedCaptionProps) => {
   const [generatedCaptions, setGeneratedCaptions] = useState<
     ICaptionResponse[]
@@ -25,7 +27,7 @@ const GeneratedCaptionWithImage = ({
     loading,
     fetchCaption,
     captions: fetchedCaptions,
-  } = useFetchCaption();
+  } = useFetchCaption({ isTrial });
 
   useEffect(() => {
     if (!(selectedCaptionType && uploadedImage)) {

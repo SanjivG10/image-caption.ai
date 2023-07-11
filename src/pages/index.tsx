@@ -8,6 +8,14 @@ import { ModalContext } from "@context/modal";
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga4";
 
+const isTimeGreaterThanOneDay = (date1: Date, date2: Date) => {
+  const oneDayMilliseconds = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
+
+  const timeDifference = Math.abs(date1.getTime() - date2.getTime());
+
+  return timeDifference > oneDayMilliseconds;
+};
+
 const IndexPage = () => {
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
   const [error, setError] = useState("");
@@ -15,11 +23,25 @@ const IndexPage = () => {
   const [showSignInModal, setShowSignInModal] = useState(false);
   const [isSignIn, setIsSignIn] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isTrial, setIsTrial] = useState(false);
 
   ReactGA.initialize("G-SWGZG00FX2");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    const todayCaptionString = localStorage.getItem("today");
+    if (!todayCaptionString) {
+      setIsTrial(true);
+      return;
+    }
+    if (todayCaptionString) {
+      const captionedDate = new Date(todayCaptionString);
+      const date = new Date();
+      if (isTimeGreaterThanOneDay(date, captionedDate)) {
+        return setIsTrial(true);
+      }
+    }
+
     if (token) {
       setIsLoggedIn(true);
     }
@@ -27,7 +49,12 @@ const IndexPage = () => {
 
   const componentToRender = () => {
     if (uploadedImage) {
-      return <GeneratedCaptionWithImage uploadedImage={uploadedImage} />;
+      return (
+        <GeneratedCaptionWithImage
+          uploadedImage={uploadedImage}
+          isTrial={isTrial}
+        />
+      );
     }
 
     return (
@@ -41,6 +68,7 @@ const IndexPage = () => {
               setError={setError}
               setUploadedImage={setUploadedImage}
               isLoggedIn={isLoggedIn}
+              isTrial={isTrial}
               setSignInModal={setShowSignInModal}
             />
           </div>
@@ -59,7 +87,9 @@ const IndexPage = () => {
           <Modal
             show={showSignInModal}
             setShow={setShowSignInModal}
-            title={isSignIn ? "Sign In" : "Register"}
+            title={
+              isSignIn ? "Please sign in to continue. Its free" : "Register"
+            }
             body={
               <SignInForm
                 setShowSignInModal={setShowSignInModal}
