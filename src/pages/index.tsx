@@ -1,5 +1,6 @@
 import GeneratedCaptionWithImage from "@components/GeneratedCaptionWithImage";
 import Header from "@components/Header";
+import AiImageCaptionGeneratorBlogContent from "@components/Info";
 import InfoHeader from "@components/InfoHeader";
 import Modal from "@components/Modal";
 import SignInForm from "@components/SignInForm";
@@ -104,8 +105,10 @@ const IndexPage = () => {
           <div className=" m-2">
             {error && <p className="text-[#ff0000]">{error}</p>}
           </div>
+
         </div>
       </main>
+      <AiImageCaptionGeneratorBlogContent />
     </ModalContext.Provider>
   );
 };
