@@ -1,4 +1,5 @@
 import React from "react";
+import { StaticImage } from "gatsby-plugin-image";
 
 const InstagramCaptionGeneratorBlog = () => {
   return (
@@ -8,10 +9,9 @@ const InstagramCaptionGeneratorBlog = () => {
           <h2 className="m-5 text-4xl font-extrabold text-center">
             Elevate your Instagram game with the Ultimate Caption Generator.
           </h2>
-          <img
-            src={"/instagram.avif"}
+          <StaticImage
+            src={"./../../../static/instagram.avif"}
             height={500}
-            width={"100%"}
             alt="image"
             className="rounded-lg"
           />
@@ -77,13 +77,15 @@ const InstagramCaptionGeneratorBlog = () => {
               about the most recent trends in the media.
             </p>
 
-            <img
-              src={"/instagram-2.avif"}
-              height={500}
-              width={"100%"}
-              alt="image"
-              className="rounded-lg"
-            />
+            <div className="flex flex-col items-center justify-center">
+              <StaticImage
+                src={"./../../../static/instagram-2.avif"}
+                height={500}
+                alt="image"
+                className="rounded-lg"
+                placeholder="blurred"
+              />
+            </div>
 
             <h3 className="my-2 text-lg font-bold">
               Make your brand the talk of the town.
