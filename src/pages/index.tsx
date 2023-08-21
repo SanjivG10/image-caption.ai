@@ -6,6 +6,7 @@ import Modal from "@components/Modal";
 import SignInForm from "@components/SignInForm";
 import UploadButton from "@components/Upload";
 import { ModalContext } from "@context/modal";
+import { Script } from "gatsby";
 import React, { useEffect, useState } from "react";
 import ReactGA from "react-ga4";
 
@@ -60,7 +61,11 @@ const IndexPage = () => {
 
     return (
       <>
-        {/* <Script src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=SgqXHu" /> */}
+        <Script
+          async
+          crossOrigin="anonymous"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7316689194254147"
+        />
 
         <div>
           <InfoHeader />
@@ -105,7 +110,6 @@ const IndexPage = () => {
           <div className=" m-2">
             {error && <p className="text-[#ff0000]">{error}</p>}
           </div>
-
         </div>
       </main>
       <AiImageCaptionGeneratorBlogContent />
