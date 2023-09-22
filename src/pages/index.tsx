@@ -59,6 +59,15 @@ const IndexPage = () => {
       );
     }
 
+    const isToday = () => {
+      const today = new Date();
+      return (
+        today.getDate() === 22 &&
+        today.getMonth() === 8 &&
+        today.getFullYear() === 2023
+      );
+    };
+
     return (
       <>
         <Script
@@ -66,6 +75,21 @@ const IndexPage = () => {
           crossOrigin="anonymous"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7316689194254147"
         />
+
+        {isToday() && (
+          <div className="bg-red-500 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 ">
+            <a
+              href="https://www.wicketgoal.com/2023/09/ndia-vs-australia-australia-tour-of-india-2023.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center space-x-4 text-white font-bold"
+            >
+              <span className="text-4xl">
+                ▶️ ️ Watch Now : India vs Australia
+              </span>
+            </a>
+          </div>
+        )}
 
         <div>
           <InfoHeader />
